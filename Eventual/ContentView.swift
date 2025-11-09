@@ -171,7 +171,7 @@ struct EventRowView: View {
                         .lineLimit(1)
                 }
                 // 修改 1：使用 nextTargetDate 显示正确的下一次日期
-                Text(event.nextTargetDate.formatted(date: .numeric, time: event.isAllDay ? .omitted : .shortened))
+                Text(event.nextTargetDate.formatted(date: .numeric, time: .omitted))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
