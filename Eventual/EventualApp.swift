@@ -1,32 +1,17 @@
-//
-//  EventualApp.swift
-//  Eventual
-//
-//  Created by Yi Zhong on 11/9/25.
-//
-
+// EventualApp.swift
 import SwiftUI
 import SwiftData
 
 @main
 struct EventualApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Event.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    // 使用我们刚才写的共享容器工厂方法
+    let container = SharedModelContainer.create()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(sharedModelContainer)
+        // 注入共享容器
+        .modelContainer(container)
     }
 }

@@ -48,7 +48,7 @@ class Event {
             return originalDate
         }
 
-        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: originalDate)
+        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: originalDate)
         
         switch repeatMode {
         case .weekly:

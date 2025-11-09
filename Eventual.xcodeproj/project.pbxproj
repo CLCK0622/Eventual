@@ -6,8 +6,42 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		7DEF54AD2EC1440D00E05CCD /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DEF54AC2EC1440D00E05CCD /* WidgetKit.framework */; };
+		7DEF54AF2EC1440D00E05CCD /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DEF54AE2EC1440D00E05CCD /* SwiftUI.framework */; };
+		7DEF54BC2EC1440E00E05CCD /* EventualWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 7DEF54AA2EC1440D00E05CCD /* EventualWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7DEF54BA2EC1440E00E05CCD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7DEF54832EC1297E00E05CCD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7DEF54A92EC1440D00E05CCD;
+			remoteInfo = EventualWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7DEF54C12EC1440E00E05CCD /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				7DEF54BC2EC1440E00E05CCD /* EventualWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		7DEF548B2EC1297E00E05CCD /* Eventual.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eventual.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7DEF54AA2EC1440D00E05CCD /* EventualWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = EventualWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		7DEF54AC2EC1440D00E05CCD /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = /System/Library/Frameworks/WidgetKit.framework; sourceTree = "<absolute>"; };
+		7DEF54AE2EC1440D00E05CCD /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = /System/Library/Frameworks/SwiftUI.framework; sourceTree = "<absolute>"; };
+		7DEF54C22EC1443900E05CCD /* EventualWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EventualWidgetExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -18,6 +52,23 @@
 			);
 			target = 7DEF548A2EC1297E00E05CCD /* Eventual */;
 		};
+		7DEF54C02EC1440E00E05CCD /* Exceptions for "EventualWidget" folder in "EventualWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 7DEF54A92EC1440D00E05CCD /* EventualWidgetExtension */;
+		};
+		7DEF54C52EC14B2C00E05CCD /* Exceptions for "Eventual" folder in "EventualWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				AppIntent.swift,
+				"Color+Extension.swift",
+				Event.swift,
+				SharedModelContainer.swift,
+			);
+			target = 7DEF54A92EC1440D00E05CCD /* EventualWidgetExtension */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -25,8 +76,17 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				7DEF54982EC1298100E05CCD /* Exceptions for "Eventual" folder in "Eventual" target */,
+				7DEF54C52EC14B2C00E05CCD /* Exceptions for "Eventual" folder in "EventualWidgetExtension" target */,
 			);
 			path = Eventual;
+			sourceTree = "<group>";
+		};
+		7DEF54B02EC1440D00E05CCD /* EventualWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				7DEF54C02EC1440E00E05CCD /* Exceptions for "EventualWidget" folder in "EventualWidgetExtension" target */,
+			);
+			path = EventualWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -39,13 +99,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7DEF54A72EC1440D00E05CCD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7DEF54AF2EC1440D00E05CCD /* SwiftUI.framework in Frameworks */,
+				7DEF54AD2EC1440D00E05CCD /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		7DEF54822EC1297E00E05CCD = {
 			isa = PBXGroup;
 			children = (
+				7DEF54C22EC1443900E05CCD /* EventualWidgetExtension.entitlements */,
 				7DEF548D2EC1297E00E05CCD /* Eventual */,
+				7DEF54B02EC1440D00E05CCD /* EventualWidget */,
+				7DEF54AB2EC1440D00E05CCD /* Frameworks */,
 				7DEF548C2EC1297E00E05CCD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,8 +126,18 @@
 			isa = PBXGroup;
 			children = (
 				7DEF548B2EC1297E00E05CCD /* Eventual.app */,
+				7DEF54AA2EC1440D00E05CCD /* EventualWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		7DEF54AB2EC1440D00E05CCD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7DEF54AC2EC1440D00E05CCD /* WidgetKit.framework */,
+				7DEF54AE2EC1440D00E05CCD /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -68,10 +150,12 @@
 				7DEF54872EC1297E00E05CCD /* Sources */,
 				7DEF54882EC1297E00E05CCD /* Frameworks */,
 				7DEF54892EC1297E00E05CCD /* Resources */,
+				7DEF54C12EC1440E00E05CCD /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7DEF54BB2EC1440E00E05CCD /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				7DEF548D2EC1297E00E05CCD /* Eventual */,
@@ -82,6 +166,28 @@
 			productName = Eventual;
 			productReference = 7DEF548B2EC1297E00E05CCD /* Eventual.app */;
 			productType = "com.apple.product-type.application";
+		};
+		7DEF54A92EC1440D00E05CCD /* EventualWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7DEF54BD2EC1440E00E05CCD /* Build configuration list for PBXNativeTarget "EventualWidgetExtension" */;
+			buildPhases = (
+				7DEF54A62EC1440D00E05CCD /* Sources */,
+				7DEF54A72EC1440D00E05CCD /* Frameworks */,
+				7DEF54A82EC1440D00E05CCD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				7DEF54B02EC1440D00E05CCD /* EventualWidget */,
+			);
+			name = EventualWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = EventualWidgetExtension;
+			productReference = 7DEF54AA2EC1440D00E05CCD /* EventualWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -94,6 +200,9 @@
 				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					7DEF548A2EC1297E00E05CCD = {
+						CreatedOnToolsVersion = 26.0.1;
+					};
+					7DEF54A92EC1440D00E05CCD = {
 						CreatedOnToolsVersion = 26.0.1;
 					};
 				};
@@ -113,12 +222,20 @@
 			projectRoot = "";
 			targets = (
 				7DEF548A2EC1297E00E05CCD /* Eventual */,
+				7DEF54A92EC1440D00E05CCD /* EventualWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		7DEF54892EC1297E00E05CCD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7DEF54A82EC1440D00E05CCD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -135,7 +252,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7DEF54A62EC1440D00E05CCD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7DEF54BB2EC1440E00E05CCD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7DEF54A92EC1440D00E05CCD /* EventualWidgetExtension */;
+			targetProxy = 7DEF54BA2EC1440E00E05CCD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		7DEF549A2EC1298100E05CCD /* Debug */ = {
@@ -143,13 +275,28 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Eventual/Eventual.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5X22PG79XX;
 				ENABLE_APP_SANDBOX = YES;
+				ENABLE_FILE_ACCESS_DOWNLOADS_FOLDER = readwrite;
+				ENABLE_FILE_ACCESS_MOVIES_FOLDER = readwrite;
+				ENABLE_FILE_ACCESS_MUSIC_FOLDER = readwrite;
+				ENABLE_FILE_ACCESS_PICTURE_FOLDER = readwrite;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SELECTED_FILES = readonly;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = YES;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = YES;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = YES;
+				ENABLE_RESOURCE_ACCESS_CAMERA = YES;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = YES;
+				ENABLE_RESOURCE_ACCESS_LOCATION = YES;
+				ENABLE_RESOURCE_ACCESS_PRINTING = YES;
+				ENABLE_RESOURCE_ACCESS_USB = YES;
+				ENABLE_USER_SELECTED_FILES = readwrite;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Eventual/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -188,13 +335,28 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Eventual/Eventual.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5X22PG79XX;
 				ENABLE_APP_SANDBOX = YES;
+				ENABLE_FILE_ACCESS_DOWNLOADS_FOLDER = readwrite;
+				ENABLE_FILE_ACCESS_MOVIES_FOLDER = readwrite;
+				ENABLE_FILE_ACCESS_MUSIC_FOLDER = readwrite;
+				ENABLE_FILE_ACCESS_PICTURE_FOLDER = readwrite;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SELECTED_FILES = readonly;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = YES;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = YES;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = YES;
+				ENABLE_RESOURCE_ACCESS_CAMERA = YES;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = YES;
+				ENABLE_RESOURCE_ACCESS_LOCATION = YES;
+				ENABLE_RESOURCE_ACCESS_PRINTING = YES;
+				ENABLE_RESOURCE_ACCESS_USB = YES;
+				ENABLE_USER_SELECTED_FILES = readwrite;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Eventual/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -344,6 +506,94 @@
 			};
 			name = Release;
 		};
+		7DEF54BE2EC1440E00E05CCD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = EventualWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5X22PG79XX;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EventualWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = EventualWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.clckkkkk.Eventual.EventualWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		7DEF54BF2EC1440E00E05CCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = EventualWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5X22PG79XX;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EventualWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = EventualWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.clckkkkk.Eventual.EventualWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -361,6 +611,15 @@
 			buildConfigurations = (
 				7DEF549A2EC1298100E05CCD /* Debug */,
 				7DEF549B2EC1298100E05CCD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7DEF54BD2EC1440E00E05CCD /* Build configuration list for PBXNativeTarget "EventualWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7DEF54BE2EC1440E00E05CCD /* Debug */,
+				7DEF54BF2EC1440E00E05CCD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
