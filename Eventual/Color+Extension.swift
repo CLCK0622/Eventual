@@ -31,37 +31,31 @@ extension Color {
     // MARK: - Method to convert a Color back into a Hex String
         
     func toHex() -> String? {
-        // 1. Get the platform-specific color representation (UIColor or NSColor)
         #if canImport(UIKit)
         typealias PlatformColor = UIColor
         let platformColor = PlatformColor(self)
         #elseif canImport(AppKit)
         typealias PlatformColor = NSColor
-        // 2. For NSColor, we must first convert it to a standard RGB color space
         guard let platformColor = PlatformColor(self).usingColorSpace(.sRGB) else {
-            return nil // Failed to convert to sRGB
+            return nil
         }
         #else
-        return nil // Platform not supported
+        return nil
         #endif
         
-        // 3. Get the RGBA components
         var red: CGFloat = 0
         var green: CGFloat = 0
         var blue: CGFloat = 0
         var alpha: CGFloat = 0
         
         #if canImport(UIKit)
-        // 4. On UIKit, getRed() returns a Bool indicating success
         guard platformColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha) else {
-            return nil // Failed to get components
+            return nil
         }
         #elseif canImport(AppKit)
-        // 5. On AppKit, getRed() returns Void (it doesn't fail)
         platformColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         #endif
         
-        // 6. Format the components into a Hex string
         let redInt = Int(red * 255.0)
         let greenInt = Int(green * 255.0)
         let blueInt = Int(blue * 255.0)

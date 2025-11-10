@@ -11,7 +11,6 @@ struct AddEventView: View {
     @State private var title: String = ""
     @State private var targetDate: Date = Date().addingTimeInterval(86400)
     @State private var selectedColor: Color = .blue
-    // 移除 isAllDay 状态
     @State private var isPinned: Bool = false
     @State private var repeatMode: RepeatMode = .none
     @State private var notes: String = ""
@@ -63,9 +62,8 @@ struct AddEventView: View {
                         ForEach(RepeatMode.allCases, id: \.self) { mode in Text(mode.rawValue).tag(mode) }
                     }.pickerStyle(.segmented)
                     
-                    // 修改：只显示日期选择器
                     DatePicker("日期", selection: $targetDate, displayedComponents: .date)
-                        .datePickerStyle(.graphical) // macOS 上用日历样式更好看
+                        .datePickerStyle(.graphical)
                         .labelsHidden()
 
                     if !isDateValid {
@@ -98,13 +96,13 @@ struct AddEventView: View {
                          Image(nsImage: nsImage)
                              .resizable()
                              .aspectRatio(contentMode: .fill)
-                             .frame(width: 220, height: 200) // 强制固定尺寸
-                             .clipShape(RoundedRectangle(cornerRadius: 12)) // 关键：确保裁剪
+                             .frame(width: 220, height: 200)
+                             .clipShape(RoundedRectangle(cornerRadius: 12))
                      } else {
                          VStack(spacing: 8) { Image(systemName: "photo.badge.plus").font(.system(size: 40)).foregroundStyle(.secondary); Text("点击选择").font(.caption).foregroundStyle(.secondary) }
                      }
                  }
-                 .onTapGesture { /* macOS 点击逻辑需完善，暂时依赖下方按钮 */ }
+                 .onTapGesture{}
                  HStack {
                      if selectedImageData != nil { Button("清除", role: .destructive) { withAnimation { selectedImageData = nil; selectedPhotoItem = nil } } }
                      PhotosPicker(selection: $selectedPhotoItem, matching: .images, photoLibrary: .shared()) { Text(selectedImageData == nil ? "选择图片..." : "更换") }
@@ -126,7 +124,6 @@ struct AddEventView: View {
                 }
             }
             Section("日期") {
-                // 修改：只显示日期
                 DatePicker("目标日期", selection: $targetDate, displayedComponents: .date)
                 if !isDateValid { Text("一次性事件必须选择未来的日期").font(.caption).foregroundStyle(.red) }
             }
@@ -150,7 +147,6 @@ struct AddEventView: View {
             title = event.title
             targetDate = event.originalDate
             selectedColor = Color(hex: event.colorHex) ?? .blue
-            // 移除 isAllDay
             isPinned = event.isPinned
             notes = event.notes ?? ""
             selectedImageData = event.imageData
@@ -162,24 +158,17 @@ struct AddEventView: View {
     
     private func loadPhoto() {
         Task {
-            // 1. Load the original full-size data
             guard let data = try? await selectedPhotoItem?.loadTransferable(type: Data.self) else { return }
             
-            // 2. Convert data to a PlatformImage
             guard let originalImage = PlatformImage(data: data) else { return }
             
-            // 3. Resize it! (e.g., max 1024x1024)
             if let resizedImage = originalImage.resized(toMaxDimension: 1024) {
-                // 4. Convert the *resized* image back to data (as JPEG for efficiency)
                 if let resizedData = resizedImage.toJpegData(compressionQuality: 0.7) {
-                    // 5. Save the resized data
                     selectedImageData = resizedData
                 } else {
-                    // Fallback: save original data if resizing failed
                     selectedImageData = data
                 }
             } else {
-                // Fallback: save original data if it was already small
                 selectedImageData = data
             }
         }
@@ -187,14 +176,12 @@ struct AddEventView: View {
 
     private func saveEvent() {
         guard !title.isEmpty && isDateValid else { return }
-        // 强制只保存日期部分
         let cleanDate = Calendar.current.startOfDay(for: targetDate)
         
         if let event = eventToEdit {
             event.title = title
             event.originalDate = cleanDate
             event.colorHex = selectedColor.toHex() ?? "#0000FF"
-            // 移除 isAllDay
             event.isPinned = isPinned
             event.notes = notes.isEmpty ? nil : notes
             event.imageData = selectedImageData

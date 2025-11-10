@@ -10,7 +10,6 @@ struct Provider: AppIntentTimelineProvider {
         guard let container = Provider.modelContainer else { return nil }
         let context = container.mainContext
         
-        // 1. 如果用户选择了特定事件
         if let selectedEntity = configuration.event {
             var descriptor = FetchDescriptor<Event>()
             if let allEvents = try? context.fetch(descriptor) {
@@ -18,7 +17,6 @@ struct Provider: AppIntentTimelineProvider {
             }
         }
         
-        // 2. 默认逻辑：获取最近的重要事件
         var descriptor = FetchDescriptor<Event>()
         if let allEvents = try? context.fetch(descriptor), !allEvents.isEmpty {
              return allEvents
@@ -81,7 +79,6 @@ struct EventualWidgetEntryView : View {
     
     @ViewBuilder
     private func backgroundLayer(for event: Event) -> some View {
-        // 调试点：确认 imageData 是否有值
         if let data = event.imageData {
             #if os(macOS)
             if let nsImage = NSImage(data: data) {

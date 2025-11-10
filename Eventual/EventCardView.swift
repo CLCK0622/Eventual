@@ -21,16 +21,14 @@ struct EventCardView: View {
                     if event.isPinned { Image(systemName: "pin.fill").foregroundStyle(.yellow).rotationEffect(.degrees(45)) }
                 }
                 Text(event.title).font(.headline).foregroundStyle(.white).lineLimit(1)
-                // 移除时间显示，只显示日期
                 Text(event.nextTargetDate.formatted(date: .numeric, time: .omitted))
                     .font(.caption).foregroundStyle(.white.opacity(0.7))
             }
             .padding(12)
         }
         .frame(height: 150)
-        // 关键修复：确保整个卡片被裁剪
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-        .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous)) // 确保点击区域也正确
+        .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
         .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
     }
     
@@ -41,8 +39,8 @@ struct EventCardView: View {
                  #if os(macOS)
                  if let nsImage = NSImage(data: data) {
                      Image(nsImage: nsImage).resizable().aspectRatio(contentMode: .fill)
-                         .frame(width: geo.size.width, height: geo.size.height) // 强制填满容器
-                         .clipped() // 关键修复：裁剪溢出部分
+                         .frame(width: geo.size.width, height: geo.size.height)
+                         .clipped()
                  } else { fallbackColor }
                  #else
                  if let uiImage = UIImage(data: data) {
