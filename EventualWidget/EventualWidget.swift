@@ -110,11 +110,15 @@ struct EventualWidgetEntryView : View {
         VStack(alignment: .leading, spacing: 2) {
             HStack(alignment: .firstTextBaseline) {
                 if event.isToday {
-                     Text("今天")
-                         .font(.system(size: family == .systemSmall ? 28 : 34, weight: .heavy, design: .rounded))
+                     Text("就是今天！")
+                         .font(.system(size: family == .systemSmall ? 18 : 24, weight: .heavy, design: .rounded))
                          .foregroundStyle(.white)
                  } else {
-                     Text("\(event.daysRemaining)")
+                     Text(event.isPast ? "已经" : "还有")
+                         .font(.subheadline.bold())
+                         .foregroundStyle(.white.opacity(0.9))
+
+                     Text("\(event.daysAbsolute)")
                          .font(.system(size: family == .systemSmall ? 38 : 48, weight: .heavy, design: .rounded))
                          .foregroundStyle(.white)
                      Text("天")
@@ -163,7 +167,7 @@ struct EventualWidget: Widget {
                     .background()
             }
         }
-        .configurationDisplayName("倒数日")
+        .configurationDisplayName("Eventual")
         .description("追踪你最重要的日子。")
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
         .contentMarginsDisabled()

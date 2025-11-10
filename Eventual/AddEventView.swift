@@ -1,4 +1,5 @@
 import SwiftUI
+import WidgetKit
 import SwiftData
 import PhotosUI
 
@@ -17,20 +18,13 @@ struct AddEventView: View {
     @State private var selectedPhotoItem: PhotosPickerItem? = nil
     @State private var selectedImageData: Data? = nil
 
-    var isDateValid: Bool {
-        if repeatMode == .none {
-            return Calendar.current.startOfDay(for: targetDate) >= Calendar.current.startOfDay(for: Date())
-        }
-        return true
-    }
-
     var body: some View {
         NavigationStack {
             contentView
                 .navigationTitle(eventToEdit == nil ? "添加新事件" : "编辑事件")
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) { Button("取消") { dismiss() } }
-                    ToolbarItem(placement: .confirmationAction) { Button("保存") { saveEvent() }.disabled(title.isEmpty || !isDateValid) }
+                    ToolbarItem(placement: .confirmationAction) { Button("保存") { saveEvent() }.disabled(title.isEmpty) }
                 }
         }
         #if os(iOS)
@@ -43,7 +37,7 @@ struct AddEventView: View {
     @ViewBuilder
     private var contentView: some View {
         #if os(macOS)
-        macOSLayout.frame(minWidth: 500, minHeight: 450).padding()
+        macOSLayout.frame(minWidth: 600, minHeight: 300).padding()
         #else
         iOSLayout
         #endif
@@ -65,21 +59,17 @@ struct AddEventView: View {
                     DatePicker("日期", selection: $targetDate, displayedComponents: .date)
                         .datePickerStyle(.graphical)
                         .labelsHidden()
-
-                    if !isDateValid {
-                        Text("一次性事件必须选择未来的日期").font(.caption).foregroundStyle(.red)
-                    }
                 }
                 Divider()
                 VStack(alignment: .leading, spacing: 8) {
-                     Text("外观与设置").font(.headline).foregroundStyle(.secondary)
-                     HStack {
-                         ColorPicker("主题色", selection: $selectedColor, supportsOpacity: false).labelsHidden()
-                         Text("主题色")
-                         Spacer()
-                         Toggle("置顶", isOn: $isPinned).toggleStyle(.switch)
-                     }
-                 }
+                    Text("外观与设置").font(.headline).foregroundStyle(.secondary)
+                    HStack {
+                        ColorPicker("主题色", selection: $selectedColor, supportsOpacity: false).labelsHidden()
+                        Text("主题色")
+                        Spacer()
+                        Toggle("置顶", isOn: $isPinned).toggleStyle(.switch)
+                    }
+                }
                 Divider()
                  VStack(alignment: .leading, spacing: 8) {
                      Text("备注").font(.headline).foregroundStyle(.secondary)
@@ -125,7 +115,6 @@ struct AddEventView: View {
             }
             Section("日期") {
                 DatePicker("目标日期", selection: $targetDate, displayedComponents: .date)
-                if !isDateValid { Text("一次性事件必须选择未来的日期").font(.caption).foregroundStyle(.red) }
             }
             Section("外观") {
                 ColorPicker("主题色", selection: $selectedColor, supportsOpacity: false)
@@ -175,7 +164,7 @@ struct AddEventView: View {
     }
 
     private func saveEvent() {
-        guard !title.isEmpty && isDateValid else { return }
+        guard !title.isEmpty else { return }
         let cleanDate = Calendar.current.startOfDay(for: targetDate)
         
         if let event = eventToEdit {
@@ -192,6 +181,7 @@ struct AddEventView: View {
             newEvent.imageData = selectedImageData
             modelContext.insert(newEvent)
         }
+        WidgetCenter.shared.reloadAllTimelines()
         dismiss()
     }
 }

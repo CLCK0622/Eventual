@@ -9,6 +9,9 @@ struct EventualApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+            #if os(macOS)
+            .frame(minWidth: 800, minHeight: 600)
+            #endif
         }
         .modelContainer(container)
     }

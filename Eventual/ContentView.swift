@@ -171,11 +171,12 @@ struct EventRowView: View {
                     .cornerRadius(8)
             } else {
                 VStack(alignment: .trailing) {
-                    Text("\(event.daysRemaining)")
+                    Text("\(event.daysAbsolute)")
                         .font(.system(.title3, design: .rounded))
                         .bold()
-                        .foregroundStyle(event.daysRemaining <= 3 && event.daysRemaining >= 0 ? .red : .primary)
-                    Text("天")
+                        .foregroundStyle(!event.isPast && event.daysRemaining <= 3 ? .red : .primary)
+                    
+                    Text(event.isPast ? "已经" : "还有")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }

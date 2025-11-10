@@ -10,15 +10,29 @@ struct EventCardView: View {
             LinearGradient(colors: [.black.opacity(0.6), .transparent], startPoint: .bottom, endPoint: .center)
             
             VStack(alignment: .leading, spacing: 4) {
-                HStack(alignment: .firstTextBaseline) {
+                HStack(alignment: .firstTextBaseline, spacing: 4) {
                     if event.isToday {
-                        Text("今天").font(.system(size: 32, weight: .bold, design: .rounded)).foregroundStyle(.white)
+                        Text("就是今天！")
+                            .font(.system(size: 24, weight: .bold, design: .rounded))
+                            .foregroundStyle(.white)
                     } else {
-                        Text("\(event.daysRemaining)").font(.system(size: 36, weight: .bold, design: .rounded)).foregroundStyle(.white)
-                        Text("天").font(.caption).fontWeight(.medium).foregroundStyle(.white.opacity(0.8))
+                        Text(event.isPast ? "已经" : "还有")
+                            .font(.caption)
+                            .fontWeight(.medium)
+                            .foregroundStyle(.white.opacity(0.8))
+                        
+                        Text("\(event.daysAbsolute)")
+                            .font(.system(size: 36, weight: .bold, design: .rounded))
+                            .foregroundStyle(.white)
+                        
+                        Text("天")
+                            .font(.caption)
+                            .fontWeight(.medium)
+                            .foregroundStyle(.white.opacity(0.8))
                     }
                     Spacer()
-                    if event.isPinned { Image(systemName: "pin.fill").foregroundStyle(.yellow).rotationEffect(.degrees(45)) }
+                    if event.isPinned { Image(systemName: "pin.fill").foregroundStyle(.yellow).rotationEffect(.degrees(45))
+                    }
                 }
                 Text(event.title).font(.headline).foregroundStyle(.white).lineLimit(1)
                 Text(event.nextTargetDate.formatted(date: .numeric, time: .omitted))

@@ -72,11 +72,19 @@ class Event {
         return components.day ?? 0
     }
     
+    var daysAbsolute: Int {
+        abs(daysRemaining)
+    }
+    
+    var isPast: Bool {
+        daysRemaining < 0
+    }
+    
     var isToday: Bool {
         return daysRemaining == 0
     }
     
     var isExpired: Bool {
-        return repeatMode == .none && daysRemaining < 0
+        return false;
     }
 }
