@@ -41,3 +41,7 @@ Built with the latest Apple technologies, it offers a seamless experience across
 # 🖥️ Usage
 
 Eventual will be available on Testflight very soon and on App Store in the near future. Stay tuned!
+
+# 👏 Contribution
+
+![Alt](https://repobeats.axiom.co/api/embed/630b57ec2cdd01c6491ec9dca435045a6cc5e28a.svg "Repobeats analytics image")
