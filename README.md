@@ -4,6 +4,10 @@
 <p><strong>Track what matters. Past, present, and future.</strong></p>
 </div>
 
+---
+
+First public beta version now available! [Click here for TestFlight access.](https://testflight.apple.com/join/wJTBHh4p)
+
 # ✨ Introduction
 
 **Eventual** is a beautifully designed, cross-platform application that helps you keep track of your most important days. Whether it's counting down to a highly anticipated vacation or counting up from a cherished anniversary, Eventual presents your moments with elegance and clarity.
