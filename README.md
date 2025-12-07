@@ -4,8 +4,6 @@
 <p><strong>Track what matters. Past, present, and future.</strong></p>
 </div>
 
----
-
 First public beta version now available! [Click here for TestFlight access.](https://testflight.apple.com/join/wJTBHh4p)
 
 # ✨ Introduction
