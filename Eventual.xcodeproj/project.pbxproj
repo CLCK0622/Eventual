@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7DD305A72EC4044D0023052F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DD305A62EC4044D0023052F /* CloudKit.framework */; };
+		7DD305A82EC404610023052F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DD305A62EC4044D0023052F /* CloudKit.framework */; };
+		7DD305AA2EC404700023052F /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DD305A92EC404700023052F /* WidgetKit.framework */; };
+		7DD305AC2EC404780023052F /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DD305AB2EC404780023052F /* SwiftUI.framework */; };
 		7DEF54AD2EC1440D00E05CCD /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DEF54AC2EC1440D00E05CCD /* WidgetKit.framework */; };
 		7DEF54AF2EC1440D00E05CCD /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DEF54AE2EC1440D00E05CCD /* SwiftUI.framework */; };
 		7DEF54BC2EC1440E00E05CCD /* EventualWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 7DEF54AA2EC1440D00E05CCD /* EventualWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7DEF54D32EC1B70500E05CCD /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 7DEF54D22EC1B70500E05CCD /* Localizable.xcstrings */; };
+		7DEF54D42EC1B70500E05CCD /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 7DEF54D22EC1B70500E05CCD /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,11 +43,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7DD305A62EC4044D0023052F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
+		7DD305A92EC404700023052F /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/WidgetKit.framework; sourceTree = DEVELOPER_DIR; };
+		7DD305AB2EC404780023052F /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/SwiftUI.framework; sourceTree = DEVELOPER_DIR; };
 		7DEF548B2EC1297E00E05CCD /* Eventual.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eventual.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DEF54AA2EC1440D00E05CCD /* EventualWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = EventualWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DEF54AC2EC1440D00E05CCD /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = /System/Library/Frameworks/WidgetKit.framework; sourceTree = "<absolute>"; };
 		7DEF54AE2EC1440D00E05CCD /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = /System/Library/Frameworks/SwiftUI.framework; sourceTree = "<absolute>"; };
 		7DEF54C22EC1443900E05CCD /* EventualWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EventualWidgetExtension.entitlements; sourceTree = "<group>"; };
+		7DEF54D22EC1B70500E05CCD /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -96,6 +106,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DD305A82EC404610023052F /* CloudKit.framework in Frameworks */,
+				7DD305AC2EC404780023052F /* SwiftUI.framework in Frameworks */,
+				7DD305AA2EC404700023052F /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DD305A72EC4044D0023052F /* CloudKit.framework in Frameworks */,
 				7DEF54AF2EC1440D00E05CCD /* SwiftUI.framework in Frameworks */,
 				7DEF54AD2EC1440D00E05CCD /* WidgetKit.framework in Frameworks */,
 			);
@@ -114,6 +128,7 @@
 		7DEF54822EC1297E00E05CCD = {
 			isa = PBXGroup;
 			children = (
+				7DEF54D22EC1B70500E05CCD /* Localizable.xcstrings */,
 				7DEF54C22EC1443900E05CCD /* EventualWidgetExtension.entitlements */,
 				7DEF548D2EC1297E00E05CCD /* Eventual */,
 				7DEF54B02EC1440D00E05CCD /* EventualWidget */,
@@ -134,6 +149,9 @@
 		7DEF54AB2EC1440D00E05CCD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7DD305AB2EC404780023052F /* SwiftUI.framework */,
+				7DD305A92EC404700023052F /* WidgetKit.framework */,
+				7DD305A62EC4044D0023052F /* CloudKit.framework */,
 				7DEF54AC2EC1440D00E05CCD /* WidgetKit.framework */,
 				7DEF54AE2EC1440D00E05CCD /* SwiftUI.framework */,
 			);
@@ -233,6 +251,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DEF54D32EC1B70500E05CCD /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +259,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DEF54D42EC1B70500E05CCD /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +320,7 @@
 				ENABLE_USER_SELECTED_FILES = readwrite;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Eventual/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -360,6 +381,7 @@
 				ENABLE_USER_SELECTED_FILES = readwrite;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Eventual/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -449,6 +471,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -504,6 +527,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Release;
 		};

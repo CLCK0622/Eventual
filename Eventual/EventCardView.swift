@@ -12,26 +12,30 @@ struct EventCardView: View {
             VStack(alignment: .leading, spacing: 4) {
                 HStack(alignment: .firstTextBaseline, spacing: 4) {
                     if event.isToday {
-                        Text("就是今天！")
+                        Text(LocalizedStringKey("就是今天！"))
                             .font(.system(size: 24, weight: .bold, design: .rounded))
+                            .minimumScaleFactor(0.5)
+                            .lineLimit(1)
                             .foregroundStyle(.white)
                     } else {
-                        Text(event.isPast ? "已经" : "还有")
+                        Text(event.isPast ? LocalizedStringKey("已经") : LocalizedStringKey("还有"))
                             .font(.caption)
                             .fontWeight(.medium)
                             .foregroundStyle(.white.opacity(0.8))
                         
                         Text("\(event.daysAbsolute)")
                             .font(.system(size: 36, weight: .bold, design: .rounded))
+                            .minimumScaleFactor(0.5)
+                            .lineLimit(1)
                             .foregroundStyle(.white)
                         
-                        Text("天")
+                        Text(LocalizedStringKey("天"))
                             .font(.caption)
                             .fontWeight(.medium)
                             .foregroundStyle(.white.opacity(0.8))
                     }
                     Spacer()
-                    if event.isPinned { Image(systemName: "pin.fill").foregroundStyle(.yellow).rotationEffect(.degrees(45))
+                    if event.isPinned { Image(systemName: "pin.fill").foregroundStyle(.secondary).rotationEffect(.degrees(45))
                     }
                 }
                 Text(event.title).font(.headline).foregroundStyle(.white).lineLimit(1)

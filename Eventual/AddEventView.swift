@@ -21,7 +21,7 @@ struct AddEventView: View {
     var body: some View {
         NavigationStack {
             contentView
-                .navigationTitle(eventToEdit == nil ? "添加新事件" : "编辑事件")
+                .navigationTitle(eventToEdit == nil ? LocalizedStringKey("添加新事件") : LocalizedStringKey("编辑事件"))
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) { Button("取消") { dismiss() } }
                     ToolbarItem(placement: .confirmationAction) { Button("保存") { saveEvent() }.disabled(title.isEmpty) }
@@ -57,7 +57,7 @@ struct AddEventView: View {
                     }.pickerStyle(.segmented)
                     
                     DatePicker("日期", selection: $targetDate, displayedComponents: .date)
-                        .datePickerStyle(.graphical)
+                        .datePickerStyle(.field)
                         .labelsHidden()
                 }
                 Divider()
@@ -71,33 +71,33 @@ struct AddEventView: View {
                     }
                 }
                 Divider()
-                 VStack(alignment: .leading, spacing: 8) {
-                     Text("备注").font(.headline).foregroundStyle(.secondary)
-                     TextEditor(text: $notes).font(.body).frame(height: 80).padding(4).background(Color(nsColor: .textBackgroundColor)).cornerRadius(6).overlay(RoundedRectangle(cornerRadius: 6).stroke(Color.gray.opacity(0.2), lineWidth: 1))
-                 }
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("备注").font(.headline).foregroundStyle(.secondary)
+                    TextEditor(text: $notes).font(.body).frame(height: 80).padding(4).background(Color(nsColor: .textBackgroundColor)).cornerRadius(6).overlay(RoundedRectangle(cornerRadius: 6).stroke(Color.gray.opacity(0.2), lineWidth: 1))
+                }
             }
             .frame(maxWidth: .infinity)
 
-             VStack(alignment: .center, spacing: 12) {
-                 Text("背景图片").font(.headline).foregroundStyle(.secondary)
-                 ZStack {
-                     RoundedRectangle(cornerRadius: 12).fill(Color.gray.opacity(0.1)).stroke(Color.gray.opacity(0.2), style: StrokeStyle(lineWidth: 2, dash: [5])).frame(height: 200)
-                     if let data = selectedImageData, let nsImage = NSImage(data: data) {
-                         Image(nsImage: nsImage)
-                             .resizable()
-                             .aspectRatio(contentMode: .fill)
-                             .frame(width: 220, height: 200)
-                             .clipShape(RoundedRectangle(cornerRadius: 12))
-                     } else {
-                         VStack(spacing: 8) { Image(systemName: "photo.badge.plus").font(.system(size: 40)).foregroundStyle(.secondary); Text("点击选择").font(.caption).foregroundStyle(.secondary) }
-                     }
-                 }
-                 .onTapGesture{}
-                 HStack {
-                     if selectedImageData != nil { Button("清除", role: .destructive) { withAnimation { selectedImageData = nil; selectedPhotoItem = nil } } }
-                     PhotosPicker(selection: $selectedPhotoItem, matching: .images, photoLibrary: .shared()) { Text(selectedImageData == nil ? "选择图片..." : "更换") }
-                 }
-             }.frame(width: 220)
+            VStack(alignment: .center, spacing: 12) {
+                Text("背景图片").font(.headline).foregroundStyle(.secondary)
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12).fill(Color.gray.opacity(0.1)).stroke(Color.gray.opacity(0.2), style: StrokeStyle(lineWidth: 2, dash: [5])).frame(height: 200)
+                    if let data = selectedImageData, let nsImage = NSImage(data: data) {
+                        Image(nsImage: nsImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 220, height: 200)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    } else {
+                        VStack(spacing: 8) { Image(systemName: "photo.badge.plus").font(.system(size: 40)).foregroundStyle(.secondary); Text("点击选择").font(.caption).foregroundStyle(.secondary) }
+                    }
+                }
+                .onTapGesture{}
+                HStack {
+                    if selectedImageData != nil { Button("清除", role: .destructive) { withAnimation { selectedImageData = nil; selectedPhotoItem = nil } } }
+                    PhotosPicker(selection: $selectedPhotoItem, matching: .images, photoLibrary: .shared()) { Text(selectedImageData == nil ? "选择图片..." : "更换") }
+                }
+            }.frame(width: 220)
         }
     }
     #endif
@@ -121,12 +121,12 @@ struct AddEventView: View {
                 Toggle("置顶", isOn: $isPinned)
             }
             Section("背景图片") {
-                 PhotosPicker(selection: $selectedPhotoItem, matching: .images, photoLibrary: .shared()) {
-                     HStack { Text("选择图片"); Spacer(); if let data = selectedImageData, let uiImage = UIImage(data: data) { Image(uiImage: uiImage).resizable().scaledToFill().frame(width: 40, height: 40).clipShape(RoundedRectangle(cornerRadius: 8)) } else { Image(systemName: "photo").foregroundStyle(.secondary) } }
-                 }
-                 if selectedImageData != nil { Button("清除图片", role: .destructive) { withAnimation { selectedImageData = nil; selectedPhotoItem = nil } } }
-             }
-             Section("备注") { TextField("写点什么...", text: $notes, axis: .vertical).lineLimit(3...6) }
+                PhotosPicker(selection: $selectedPhotoItem, matching: .images, photoLibrary: .shared()) {
+                    HStack { Text("选择图片"); Spacer(); if let data = selectedImageData, let uiImage = UIImage(data: data) { Image(uiImage: uiImage).resizable().scaledToFill().frame(width: 40, height: 40).clipShape(RoundedRectangle(cornerRadius: 8)) } else { Image(systemName: "photo").foregroundStyle(.secondary) } }
+                }
+                if selectedImageData != nil { Button("清除图片", role: .destructive) { withAnimation { selectedImageData = nil; selectedPhotoItem = nil } } }
+            }
+            Section("备注") { TextField("写点什么...", text: $notes, axis: .vertical).lineLimit(3...6) }
         }
     }
     #endif

@@ -1,10 +1,17 @@
 import SwiftUI
+import WidgetKit
 import SwiftData
 
-// 定义视图模式
 enum ViewMode: String, CaseIterable {
-    case list = "列表"
-    case grid = "网格"
+    case list = "List"
+    case grid = "Grid"
+    
+    var localizedName: LocalizedStringKey {
+        switch self {
+        case .list: return "列表"
+        case .grid: return "网格"
+        }
+    }
 }
 
 struct ContentView: View {
@@ -43,7 +50,7 @@ struct ContentView: View {
                         Menu {
                             Picker("视图模式", selection: $viewMode) {
                                 ForEach(ViewMode.allCases, id: \.self) { mode in
-                                    Label(mode.rawValue, systemImage: mode == .list ? "list.bullet" : "square.grid.2x2")
+                                    Label(mode.localizedName, systemImage: mode == .list ? "list.bullet" : "square.grid.2x2")
                                         .tag(mode)
                                 }
                             }
@@ -70,7 +77,6 @@ struct ContentView: View {
     @ViewBuilder
     private var contentView: some View {
         if viewMode == .list {
-            // MARK: - 列表视图 (iOS 原生风格)
             List {
                 ForEach(sortedEvents) { event in
                     EventRowView(event: event)
@@ -86,7 +92,7 @@ struct ContentView: View {
                         }
                         .swipeActions(edge: .leading, allowsFullSwipe: true) {
                             Button { togglePin(event) } label: {
-                                Label(event.isPinned ? "取消置顶" : "置顶", systemImage: event.isPinned ? "pin.slash.fill" : "pin.fill")
+                                Label(event.isPinned ? LocalizedStringKey("取消置顶") : LocalizedStringKey("置顶"), systemImage: event.isPinned ? "pin.slash.fill" : "pin.fill")
                             }
                             .tint(.orange)
                         }
@@ -99,7 +105,6 @@ struct ContentView: View {
             .listStyle(.inset)
             #endif
         } else {
-            // MARK: - 网格视图 (macOS & iOS)
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 16) {
                     ForEach(sortedEvents) { event in
@@ -107,7 +112,7 @@ struct ContentView: View {
                             .onTapGesture { eventToEdit = event }
                             .contextMenu {
                                 Button { togglePin(event) } label: {
-                                    Label(event.isPinned ? "取消置顶" : "置顶", systemImage: event.isPinned ? "pin.slash.fill" : "pin.fill")
+                                    Label(event.isPinned ? LocalizedStringKey("取消置顶") : LocalizedStringKey("置顶"), systemImage: event.isPinned ? "pin.slash.fill" : "pin.fill")
                                 }
                                 Divider()
                                 Button(role: .destructive) { deleteEvent(event) } label: {
@@ -123,16 +128,17 @@ struct ContentView: View {
 
     private func togglePin(_ event: Event) {
         event.isPinned.toggle()
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     private func deleteEvent(_ event: Event) {
         withAnimation {
             modelContext.delete(event)
         }
+        WidgetCenter.shared.reloadAllTimelines()
     }
 }
 
-// MARK: - 简化的行视图
 struct EventRowView: View {
     let event: Event
     
@@ -147,7 +153,7 @@ struct EventRowView: View {
                     if event.isPinned {
                         Image(systemName: "pin.fill")
                             .font(.caption2)
-                            .foregroundStyle(.orange)
+                            .foregroundStyle(.secondary)
                             .rotationEffect(.degrees(45))
                     }
                     Text(event.title)
@@ -162,7 +168,7 @@ struct EventRowView: View {
             Spacer()
             
             if event.isToday {
-                Text("就是今天！")
+                Text(LocalizedStringKey("就是今天！"))
                     .font(.headline)
                     .foregroundStyle(.red)
                     .padding(.horizontal, 8)
@@ -170,13 +176,19 @@ struct EventRowView: View {
                     .background(Color.red.opacity(0.1))
                     .cornerRadius(8)
             } else {
-                VStack(alignment: .trailing) {
+                HStack(alignment: .firstTextBaseline, spacing: 4) {
+                    Text(event.isPast ? LocalizedStringKey("已经") : LocalizedStringKey("还有"))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    
                     Text("\(event.daysAbsolute)")
                         .font(.system(.title3, design: .rounded))
                         .bold()
+                        .minimumScaleFactor(0.5)
+                        .lineLimit(1)
                         .foregroundStyle(!event.isPast && event.daysRemaining <= 3 ? .red : .primary)
                     
-                    Text(event.isPast ? "已经" : "还有")
+                    Text(LocalizedStringKey("天"))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }

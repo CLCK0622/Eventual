@@ -32,7 +32,7 @@ struct Provider: AppIntentTimelineProvider {
     }
 
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), event: Event(title: "示例事件", targetDate: Date(), color: .blue))
+        SimpleEntry(date: Date(), event: Event(title: "Sample Event", targetDate: Date(), color: .blue))
     }
 
     @MainActor
@@ -58,6 +58,7 @@ struct SimpleEntry: TimelineEntry {
 struct EventualWidgetEntryView : View {
     var entry: Provider.Entry
     @Environment(\.widgetFamily) var family
+    @Environment(\.widgetRenderingMode) var widgetRenderingMode
 
     var body: some View {
         GeometryReader { geo in
@@ -66,7 +67,11 @@ struct EventualWidgetEntryView : View {
                     backgroundLayer(for: event)
                         .frame(width: geo.size.width, height: geo.size.height)
                         .clipped()
-                    LinearGradient(colors: [.black.opacity(0.6), .clear], startPoint: .bottom, endPoint: .top)
+                    
+                    if widgetRenderingMode != .accented {
+                        LinearGradient(colors: [.black.opacity(0.6), .clear], startPoint: .bottom, endPoint: .top)
+                    }
+                    
                     contentLayer(for: event)
                         .padding(family == .systemSmall ? 12 : 16)
                 }
@@ -77,9 +82,19 @@ struct EventualWidgetEntryView : View {
         }
     }
     
+    var dynamicTextColor: Color {
+        if widgetRenderingMode == .accented {
+            return .primary
+        } else {
+            return .white
+        }
+    }
+    
     @ViewBuilder
     private func backgroundLayer(for event: Event) -> some View {
-        if let data = event.imageData {
+        if widgetRenderingMode == .accented {
+            Color.clear.opacity(0.001)
+        } else if let data = event.imageData {
             #if os(macOS)
             if let nsImage = NSImage(data: data) {
                 Image(nsImage: nsImage)
@@ -110,43 +125,49 @@ struct EventualWidgetEntryView : View {
         VStack(alignment: .leading, spacing: 2) {
             HStack(alignment: .firstTextBaseline) {
                 if event.isToday {
-                     Text("就是今天！")
-                         .font(.system(size: family == .systemSmall ? 18 : 24, weight: .heavy, design: .rounded))
-                         .foregroundStyle(.white)
+                     Text(LocalizedStringKey("今天"))
+                         .font(.system(size: family == .systemSmall ? 28 : 34, weight: .heavy, design: .rounded))
+                         .foregroundStyle(dynamicTextColor)
                  } else {
-                     Text(event.isPast ? "已经" : "还有")
+                     Text(event.isPast ? LocalizedStringKey("已经") : LocalizedStringKey("剩"))
                          .font(.subheadline.bold())
-                         .foregroundStyle(.white.opacity(0.9))
+                         .foregroundStyle(dynamicTextColor.opacity(0.9))
 
                      Text("\(event.daysAbsolute)")
                          .font(.system(size: family == .systemSmall ? 38 : 48, weight: .heavy, design: .rounded))
-                         .foregroundStyle(.white)
-                     Text("天")
+                         .foregroundStyle(dynamicTextColor)
+                         .minimumScaleFactor(0.3)
+                         .lineLimit(1)
+                     
+                     Text(LocalizedStringKey("天"))
                          .font(.subheadline.bold())
-                         .foregroundStyle(.white.opacity(0.9))
+                         .foregroundStyle(dynamicTextColor.opacity(0.9))
                  }
                 Spacer()
                 if event.isPinned {
                     Image(systemName: "pin.fill")
-                        .foregroundStyle(.yellow)
+                        .foregroundStyle(widgetRenderingMode == .accented ? .primary : .secondary)
                         .rotationEffect(.degrees(45))
+                        .widgetAccentable()
                 }
             }
             Text(event.title)
                 .font(.headline)
                 .fontWeight(.semibold)
-                .foregroundStyle(.white)
+                .foregroundStyle(dynamicTextColor)
                 .lineLimit(1)
             Text(event.nextTargetDate.formatted(date: .numeric, time: .omitted))
                 .font(.caption)
                 .fontWeight(.medium)
-                .foregroundStyle(.white.opacity(0.8))
+                .foregroundStyle(dynamicTextColor.opacity(0.8))
         }
     }
     
     private var emptyStateView: some View {
         VStack {
-            Text("暂无事件").font(.headline).foregroundStyle(.secondary)
+            Text(LocalizedStringKey("暂无事件"))
+                .font(.headline)
+                .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.gray.opacity(0.1))
@@ -167,8 +188,8 @@ struct EventualWidget: Widget {
                     .background()
             }
         }
-        .configurationDisplayName("Eventual")
-        .description("追踪你最重要的日子。")
+        .configurationDisplayName(LocalizedStringResource("Eventual"))
+        .description(LocalizedStringResource("记录你最重要的日子。"))
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
         .contentMarginsDisabled()
     }

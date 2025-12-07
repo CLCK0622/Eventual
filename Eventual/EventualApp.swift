@@ -1,4 +1,3 @@
-
 import SwiftUI
 import SwiftData
 
@@ -7,12 +6,19 @@ struct EventualApp: App {
     let container = SharedModelContainer.create()
 
     var body: some Scene {
-        WindowGroup {
+        #if os(macOS)
+        Window("Eventual", id: "main") {
             ContentView()
-            #if os(macOS)
-            .frame(minWidth: 800, minHeight: 600)
-            #endif
+                .frame(minWidth: 800, minHeight: 600)
         }
         .modelContainer(container)
+        .handlesExternalEvents(matching: Set(arrayLiteral: "*"))
+        #else
+        WindowGroup {
+            ContentView()
+        }
+        .modelContainer(container)
+        .handlesExternalEvents(matching: Set(arrayLiteral: "*"))
+        #endif
     }
 }

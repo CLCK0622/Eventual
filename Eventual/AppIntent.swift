@@ -4,10 +4,10 @@ import SwiftUI
 
 struct EventEntity: AppEntity {
     static var defaultQuery = EventQuery()
-    static var typeDisplayRepresentation: TypeDisplayRepresentation = "事件"
+    static var typeDisplayRepresentation: TypeDisplayRepresentation = TypeDisplayRepresentation(name: LocalizedStringResource("事件"))
 
     var id: UUID
-    @Property(title: "标题") var title: String
+    @Property(title: LocalizedStringResource("标题")) var title: String
 
     init(id: UUID, title: String) {
         self.id = id
@@ -67,6 +67,6 @@ struct ConfigurationAppIntent: WidgetConfigurationIntent {
     static var title: LocalizedStringResource = "选择事件"
     static var description: IntentDescription = "选择要在小组件中显示的特定事件。"
 
-    @Parameter(title: "事件")
+    @Parameter(title: "事件") // MARK: i18n
     var event: EventEntity?
 }

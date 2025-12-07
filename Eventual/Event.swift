@@ -2,22 +2,33 @@ import SwiftData
 import SwiftUI
 
 enum RepeatMode: String, CaseIterable, Codable {
-    case none = "一次性"
-    case weekly = "每周"
-    case monthly = "每月"
-    case yearly = "每年"
+    case none = "None"
+    case weekly = "Weekly"
+    case monthly = "Monthly"
+    case yearly = "Yearly"
+    
+    var localizedName: LocalizedStringResource {
+        switch self {
+        case .none: return "一次性"
+        case .weekly: return "每周"
+        case .monthly: return "每月"
+        case .yearly: return "每年"
+        }
+    }
 }
 
 @Model
 class Event {
-    var id: UUID
-    var title: String
-    var originalDate: Date
-    var colorHex: String
+    var id: UUID = UUID()
+    var title: String = ""
+    var originalDate: Date = Date()
+    var colorHex: String = "#0000FF"
     var notes: String?
-    var createdAt: Date
+    var createdAt: Date = Date()
     var isPinned: Bool = false
-    @Attribute(.externalStorage) var imageData: Data?
+    
+    var imageData: Data?
+    
     var repeatModeRaw: String = RepeatMode.none.rawValue
 
     init(title: String, targetDate: Date, color: Color = .blue, isPinned: Bool = false, repeatMode: RepeatMode = .none) {
@@ -81,10 +92,10 @@ class Event {
     }
     
     var isToday: Bool {
-        return daysRemaining == 0
+        daysRemaining == 0
     }
     
     var isExpired: Bool {
-        return false;
+        return false
     }
 }
